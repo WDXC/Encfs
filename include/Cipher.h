@@ -44,9 +44,54 @@ namespace encfs {
       virtual ~Cipher();
 
       virtual Interface interface() const = 0;
-      
-      virtual CipherKey newKey
 
+      virtual CipherKey newKey(const char* password, int passwdLength,
+                               int& iterationCount, long desiredFunctionDuration,
+                               const unsigned char* salt, int saltLen) = 0;
+
+      virtual CipherKey newKey(const char* password, int passwdLength) = 0;
+
+      virtual CipherKey newRandomKey() = 0;
+
+      virtual CipherKey readKey(const unsigned char* data,
+                                const CipherKey& encodingKey,
+                                bool checkKey = true) = 0;
+      
+      virtual void encodeAsString(const CipherKey& key,
+                                  const CipherKey& encodingKey);
+
+      virtual bool compareKey(const CipherKey& A, const CipherKey& B) const = 0;
+
+      virtual int keySize() const = 0;
+      virtual int encodedKeySize() const = 0;
+      virtual int cipherBlockSize() const = 0;
+
+      virtual bool randomize(unsigned char* buf, int len,
+                             bool strongRandom) const = 0;
+
+      virtual uint64_t MAC_64(const unsigned char* src, int len,
+                              const CipherKey& key,
+                              uint64_t *chainedIV = 0) const = 0;
+
+      unsigned int MAC_32(const unsigned char* src, int len, const CipherKey& key,
+                           uint64_t* chainedIV = 0) const ;
+      unsigned int MAC_16(const unsigned char* src, int len, const CipherKey& key,
+                          uint64_t* chainedIV = 0) const;
+
+      virtual bool streamEncode(unsigned char* data, int len, uint64_t iv64,
+                                const CipherKey& key) const = 0;
+      virtual bool streamDecode(unsigned char* data, int len, uint64_t iv64,
+                                const CipherKey& key) const = 0;
+
+      virtual bool nameEncode(unsigned char* data, int len, uint64_t iv64,
+                              const CipherKey& key) const;
+      virtual bool nameDecode(unsigned char* data, int len, uint64_t iv64,
+                              const CipherKey& key) const;
+
+      virtual bool blockEncode(unsigned char* buf, int size, uint64_t iv64,
+                               const CipherKey& key) const = 0;
+      virtual bool blockDecode(unsigned char* buf, int size, uint64_t iv64,
+                               const CipherKey& key) const = 0;
   };
 
 
