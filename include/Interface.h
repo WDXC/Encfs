@@ -2,6 +2,7 @@
 #define _Interface_incl_
 
 #include <string>
+namespace encfs {
 
 class ConfigVar;
 
@@ -18,7 +19,7 @@ class Interface {
     int revision() const;
     int age() const;
 
-    std::string name();
+    std::string& name();
     int& current();
     int& revision();
     int& age();
@@ -42,5 +43,6 @@ bool operator<=(const Interface& A, const Interface& B);
 bool operator>=(const Interface& A, const Interface& B);
 bool operator==(const Interface& A, const Interface& B);
 bool operator!=(const Interface& A, const Interface& B);
+}
 
 #endif

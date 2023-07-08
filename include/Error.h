@@ -3,7 +3,7 @@
 
 // Provides compatibility with RLog's rAssert, which throws an Error exception.
 
-#include "easylogging++.h"
+#include <easylogging++.h>
 #include <stdexcept>
 
 // Cygwin / WinFsp does not support EBADMSG yet

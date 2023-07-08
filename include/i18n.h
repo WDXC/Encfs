@@ -22,7 +22,7 @@
 #define _i18n_incl_
 
 #include "config.h"
-#include "intl/gettext.h"
+#include "gettext.h"
 
 // make shortcut for gettext
 #define _(STR) gettext(STR)
