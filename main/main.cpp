@@ -42,7 +42,7 @@
 #include "autosprintf.h"
 #include "config.h"
 #include "encfs.h"
-#include "fuse.h"
+#include <fuse/fuse.h>
 #include "i18n.h"
 #include "openssl.h"
 
@@ -672,6 +672,7 @@ int main(int argc, char *argv[]) {
   }
 
   encfs::initLogging(encfsArgs->isVerbose, encfsArgs->isDaemon);
+  ELPP_INITIALIZE_SYSLOG(encfsArgs->syslogTag.c_str(), LOG_PID, LOG_USER);
 
   // Let's unmount if requested
   if (encfsArgs->opts->unmount) {

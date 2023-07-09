@@ -2,7 +2,7 @@
 #define _encfs_incl_
 
 #include "easylogging++.h"
-#include <fuse.h>
+#include <fuse/fuse.h>
 #include <sys/types.h>
 #include <unistd.h>
 
@@ -61,8 +61,10 @@ int encfs_ftruncate(const char* path, off_t size, struct fuse_file_info* fi);
 int encfs_utime(const char* path, struct utimbuf* buf);
 int encfs_open(const char* path, struct fuse_file_info* info);
 int encfs_create(const char* path, mode_t mode, struct fuse_file_info* info);
-int encfs_release(const char* path, char* buf, size_t size, off_t offset,
-                  struct fuse_file_info* info);
+int encfs_release(const char *path, struct fuse_file_info *info);
+int encfs_read(const char *path, char *buf, size_t size, off_t offset,
+               struct fuse_file_info *info);
+
 int encfs_write(const char* path, const char* buf, size_t size, off_t offset,
                 struct fuse_file_info* info);
 int encfs_statfs(const char* , struct statvfs* fst);

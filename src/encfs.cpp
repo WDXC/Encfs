@@ -52,7 +52,7 @@
 #include "Error.h"
 #include "FileNode.h"
 #include "FileUtils.h"
-#include "fuse.h"
+#include <fuse/fuse.h>
 
 #define ESUCCESS 0
 

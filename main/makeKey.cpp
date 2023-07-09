@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
   const char *type = argv[1];
   int size = atoi(argv[2]);
 
-  encfs::openssl_init(false);
+  openssl_init(false);
 
   // get a list of the available algorithms
   std::shared_ptr<Cipher> cipher = Cipher::New(type, size);

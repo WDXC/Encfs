@@ -1737,7 +1737,7 @@ RootPtr initFS(EncFS_Context *ctx, const std::shared_ptr<EncFS_Opts> &opts) {
 
 void unmountFS(const char *mountPoint) {
   // fuse_unmount returns void, is assumed to succeed
-  fuse_unmount(mountPoint);
+  fuse_unmount(mountPoint, nullptr);
 #ifdef __APPLE__
   // fuse_unmount does not work on Mac OS, see #428
   // However it makes encfs to hang, so we must unmount

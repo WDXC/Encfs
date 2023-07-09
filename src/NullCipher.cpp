@@ -1,11 +1,11 @@
-#include "../include/NullCipher.h"
+#include "NullCipher.h"
 
 #include <cstring>
 #include <memory>
 
-#include "../include/Cipher.h"
-#include "../include/Interface.h"
-#include "../include/Range.h"
+#include "Cipher.h"
+#include "Interface.h"
+#include "Range.h"
 
 using namespace std;
 
@@ -73,6 +73,15 @@ CipherKey NullCipher::newKey(const char*, int , int &, long,
 bool NullCipher::randomize(unsigned char* buf, int len, bool) const {
   memset(buf, 0, len);
   return true;
+}
+
+CipherKey NullCipher::newRandomKey() { return gNullKey; }
+
+CipherKey NullCipher::newKey(const char *, int) { return gNullKey; }
+
+uint64_t NullCipher::MAC_64(const unsigned char *, int, const CipherKey &,
+                            uint64_t *) const {
+  return 0;
 }
 
 CipherKey NullCipher::readKey(const unsigned char*, const CipherKey&, bool) {
